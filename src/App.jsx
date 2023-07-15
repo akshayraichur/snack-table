@@ -36,7 +36,7 @@ function App() {
       product_weight: "21g",
       price: 299,
       calories: 150,
-      ingredients: ["Oats", "Honey", "Nuts", "Dried Fruits"],
+      ingredients: ["Oats", "Honey", "Nuts", "Dried Fruits"].join(", "),
     },
     {
       id: 2,
@@ -44,7 +44,7 @@ function App() {
       product_weight: "73g",
       price: 749,
       calories: 353,
-      ingredients: ["Almonds", "Cashews", "Dried Cranberries", "Dried Blueberries"],
+      ingredients: ["Almonds", "Cashews", "Dried Cranberries", "Dried Blueberries"].join(", "),
     },
     {
       id: 3,
@@ -52,7 +52,7 @@ function App() {
       product_weight: "28g",
       price: 279,
       calories: 318,
-      ingredients: ["Sweet Potatoes", "Beets", "Kale", "Sea Salt"],
+      ingredients: ["Sweet Potatoes", "Beets", "Kale", "Sea Salt"].join(", "),
     },
     {
       id: 4,
@@ -60,7 +60,7 @@ function App() {
       product_weight: "100g",
       price: 499,
       calories: 130,
-      ingredients: ["Dates", "Almond Butter", "Protein Powder", "Chia Seeds"],
+      ingredients: ["Dates", "Almond Butter", "Protein Powder", "Chia Seeds"].join(", "),
     },
   ]);
 
@@ -81,16 +81,20 @@ function App() {
   const searchTable = (e) => {
     let value = e.target.value;
     let newRows = [...rows];
-    let reducedNames = newRows.reduce((acc, curr) => {
-      acc.push(curr.product_name);
 
-      return acc;
-    }, []);
-    console.log(reducedNames, value);
+    let latestRows = newRows.filter((item) => {
+      let name = item.product_name;
+      let ingItems = item.ingredients;
+      if (name.toLowerCase().includes(value.toLowerCase())) {
+        return item;
+      }
 
-    if (reducedNames.includes(value)) {
-      console.log("hi there");
-    }
+      if (ingItems.toLowerCase().includes(value.toLowerCase())) {
+        return item;
+      }
+    });
+
+    setRows([...latestRows]);
   };
 
   return (
