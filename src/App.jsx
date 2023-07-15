@@ -1,68 +1,11 @@
 import { useState } from "react";
 import Table from "./components/Table";
+import { ROWS } from "./constants/rows";
+import { COLUMNS } from "./constants/columns";
 
 function App() {
-  const [columns] = useState([
-    {
-      name: "ID",
-      accessor: "id",
-    },
-    {
-      name: "Product Name",
-      accessor: "product_name",
-    },
-    {
-      name: "Product Weight",
-      accessor: "product_weight",
-    },
-    {
-      name: "Price (INR)",
-      accessor: "price",
-    },
-    {
-      name: "Calories",
-      accessor: "calories",
-    },
-    {
-      name: "Ingredients",
-      accessor: "ingredients",
-    },
-  ]);
-
-  const [rows, setRows] = useState([
-    {
-      id: 1,
-      product_name: "Granola Bar",
-      product_weight: "21g",
-      price: 299,
-      calories: 150,
-      ingredients: ["Oats", "Honey", "Nuts", "Dried Fruits"].join(", "),
-    },
-    {
-      id: 2,
-      product_name: "Fruit and Nut Mix",
-      product_weight: "73g",
-      price: 749,
-      calories: 353,
-      ingredients: ["Almonds", "Cashews", "Dried Cranberries", "Dried Blueberries"].join(", "),
-    },
-    {
-      id: 3,
-      product_name: "Veggie Chips",
-      product_weight: "28g",
-      price: 279,
-      calories: 318,
-      ingredients: ["Sweet Potatoes", "Beets", "Kale", "Sea Salt"].join(", "),
-    },
-    {
-      id: 4,
-      product_name: "Protein Balls",
-      product_weight: "100g",
-      price: 499,
-      calories: 130,
-      ingredients: ["Dates", "Almond Butter", "Protein Powder", "Chia Seeds"].join(", "),
-    },
-  ]);
+  const [columns] = useState(COLUMNS);
+  const [rows, setRows] = useState(ROWS);
 
   const sortingValues = (type) => {
     if (type === "price") {
@@ -79,7 +22,13 @@ function App() {
   };
 
   const searchTable = (e) => {
-    let value = e.target.value;
+    let value = e.target.value.trim();
+
+    if (!value) {
+      setRows([...ROWS]);
+      return;
+    }
+
     let newRows = [...rows];
 
     let latestRows = newRows.filter((item) => {
