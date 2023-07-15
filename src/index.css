@@ -1,0 +1,48 @@
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Inter", sans-serif;
+}
+
+input {
+  padding: 0.4rem 0.4rem;
+  font-size: 1.1rem;
+  font-family: inherit;
+  width: 50%;
+}
+
+.container {
+  max-width: 800px;
+  width: 100%;
+  margin: 1rem auto;
+  padding: 1rem;
+}
+
+.table-container {
+  margin: 1rem 0;
+}
+
+table {
+  width: 100%;
+}
+
+table,
+th,
+td {
+  border: 1px solid black;
+  border-collapse: collapse;
+}
+
+td {
+  padding: 0.4rem;
+}
+
+.table-title {
+  cursor: pointer;
+}
